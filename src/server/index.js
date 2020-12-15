@@ -82,7 +82,7 @@ async function NextAuthHandler (req, res, userSuppliedOptions) {
     // prefix, but enable them by default if the site URL is HTTPS; but not for
     // non-HTTPS URLs like http://localhost which are used in development).
     // For more on prefixes see https://googlechrome.github.io/samples/cookie-prefixes/
-    const useSecureCookies = userSuppliedOptions.useSecureCookies || baseUrl().protocol.startsWith('https://')
+    const useSecureCookies = userSuppliedOptions.useSecureCookies || baseUrl().protocol === 'https:'
     const cookiePrefix = useSecureCookies ? '__Secure-' : ''
 
     // @TODO Review cookie settings (names, options)
