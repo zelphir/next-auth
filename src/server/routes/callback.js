@@ -32,7 +32,7 @@ export default async (req, res, options, done) => {
 
   if (type === 'oauth') {
     try {
-      oAuthCallback(req, provider, csrfToken, async (error, profile, account, OAuthProfile) => {
+      oAuthCallback(req, provider, csrfToken, async (error, profile, account, OAuthProfile, idToke) => {
         try {
           if (error) {
             logger.error('CALLBACK_OAUTH_ERROR', error)
@@ -68,7 +68,7 @@ export default async (req, res, options, done) => {
           }
 
           try {
-            const signInCallbackResponse = await callbacks.signIn(userOrProfile, account, OAuthProfile)
+            const signInCallbackResponse = await callbacks.signIn(userOrProfile, account, OAuthProfile, idToke)
             if (signInCallbackResponse === false) {
               return redirect(`${baseUrl}${basePath}/error?error=AccessDenied`)
             }
@@ -89,7 +89,7 @@ export default async (req, res, options, done) => {
               email: user.email,
               picture: user.image
             }
-            const jwtPayload = await callbacks.jwt(defaultJwtPayload, user, account, OAuthProfile, isNewUser)
+            const jwtPayload = await callbacks.jwt(defaultJwtPayload, user, account, OAuthProfile, isNewUser, idToke)
 
             // Sign and encrypt token
             const newEncodedJwt = await jwt.encode({ ...jwt, token: jwtPayload })

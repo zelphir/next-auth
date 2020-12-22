@@ -1,9 +1,9 @@
 {
-  "name": "next-auth",
-  "version": "3.1.0",
+  "name": "@zelphir/next-auth",
+  "version": "3.1.1",
   "description": "Authentication for Next.js",
   "homepage": "https://next-auth.js.org",
-  "repository": "https://github.com/nextauthjs/next-auth.git",
+  "repository": "https://github.com/zelphir/next-auth.git",
   "author": "Iain Collins <me@iaincollins.com>",
   "main": "index.js",
   "scripts": {
@@ -26,8 +26,8 @@
     "db:start": "docker-compose -f test/docker/databases.yml up -d",
     "db:stop": "docker-compose -f test/docker/databases.yml down",
     "prepublishOnly": "npm run build",
-    "publish:beta": "npm publish --tag beta",
-    "publish:canary": "npm publish --tag canary",
+    "publish:beta": "yarn publish --tag beta npm --access public",
+    "publish:canary": "yarn publish --tag canary --access public",
     "lint": "standard",
     "lint:fix": "standard --fix"
   },
